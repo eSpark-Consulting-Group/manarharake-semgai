@@ -103,4 +103,12 @@ predicted_classes = np.argmax(predictions, axis=1)
 accuracy= accuracy_score(y_test, predicted_classes)
 print(f'Model accuracy: {accuracy}')
 
-cnn.save('cnn_model.keras')
+# Convert directly to TFLite instead of saving as .keras
+converter = tf.lite.TFLiteConverter.from_keras_model(cnn)
+tflite_model = converter.convert()
+
+# Save the .tflite model to a file
+with open('cnn_model.tflite', 'wb') as f:
+    f.write(tflite_model)
+
+# cnn.save('cnn_model.keras')
