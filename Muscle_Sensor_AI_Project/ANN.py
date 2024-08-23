@@ -69,7 +69,7 @@ print(confusion_matrix(y_test, y_pred))
 
 print(classification_report(y_test, y_pred))
 
-print(accuracy_score(y_test, y_pred))
+print(accuracy_score(y_test, y_pred)) #accuracy: 84.6%
 
 # Converting the model to ONNX format
 initial_type = [('float_input', FloatTensorType([None, train_X.shape[1]]))]
