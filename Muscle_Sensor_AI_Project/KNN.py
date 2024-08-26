@@ -75,5 +75,5 @@ initial_type = [('float_input', FloatTensorType([None, X_train.shape[1]]))]
 onnx_model = convert_sklearn(knn, initial_types=initial_type)
 
 # Saving the ONNX model to a file
-with open("mlp_model.onnx", "wb") as f:
+with open("knn_model.onnx", "wb") as f:
     f.write(onnx_model.SerializeToString())
