@@ -96,3 +96,16 @@ print(classification_report(y_test, predicted_classes))
 
 # Save the model
 lstm.save('lstm_model.keras')
+
+# Convert directly to TFLite instead of saving as .keras
+converter = tf.lite.TFLiteConverter.from_keras_model(lstm)
+converter.target_spec.supported_ops = [
+    tf.lite.OpsSet.TFLITE_BUILTINS,   # Enable TensorFlow Lite ops.
+    tf.lite.OpsSet.SELECT_TF_OPS      # Enable full TensorFlow ops.
+]
+converter.experimental_enable_resource_variables = True  # This flag addresses the resource variable issue.
+tflite_model = converter.convert()
+
+# Save the .tflite model to a file
+with open('lstm_model.tflite', 'wb') as f:
+    f.write(tflite_model)
