@@ -12,8 +12,8 @@ model = tf.keras.models.load_model('Muscle_Sensor_AI_Project/cnn_model.keras')
 # 1e-05,1e-05,0,0.00025,0.00014,6e-05,-2e-05,-0.00011               actual_class = 7,        predicted_class = 0
 # 1e-05,-2e-05,-1e-05,-3e-05,0,-1e-05,0,-1e-05                      actual_class = 0,        predicted_class = 0
 
-# Test loss : 47.99765348434448 %
-# Test accuracy : 83.42413902282715 %
+# Test loss : 33.39604139328003 %
+# Test accuracy : 90.79570174217224 %
 
 def get_user_inputs():
     inputs = []
