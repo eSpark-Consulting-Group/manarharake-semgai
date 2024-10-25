@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 
 @tf.function(input_signature=[
     tf.TensorSpec(shape=[None, 1, 8], dtype=tf.float32, name="input"),
@@ -14,10 +15,17 @@ def train_step(input, labels):
 
     return {"loss": loss}
 
+mean = np.array([-7.95881516e-06, -9.38854240e-06, -9.54846807e-06, -9.60116508e-06, 
+                 -1.60469748e-05, -1.08046102e-05, -9.41372582e-06, -9.66059596e-06])
+
+std = np.array([0.00016315, 0.00011924, 0.00012407, 0.00022574, 0.0002724,  
+                0.00021517, 0.00015284, 0.0001722])
+
 @tf.function(input_signature=[
     tf.TensorSpec(shape=[None, 1, 8], dtype=tf.float32, name="input")
 ])
 def serve(input):
+    input = (input - mean) / std
     return {"output": model(input)}
 
 model = tf.keras.models.load_model('lstm_model.keras')
